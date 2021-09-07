@@ -1,16 +1,5 @@
 # Projet final pour Déploiement API Docker&Cloud
 
-### Équipe du Groupe 5  : 
-- Armand KOUYATE,   
-- Alexis DA MOTA,   
-- Aous BELKACEM,   
-- Stephen CLACO,   
-- Afef ZRIBI,   
-- Salimata KONE,
-- Aldin HOUSSOU
-- Jordan MEKKI
-
-
 # Recipes API
 
 ## Install API without Docker
