@@ -1,0 +1,66 @@
+version: '3'
+services:
+  ## Service API
+  ## api:
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/app
+      STRAPI_HOST: http://strapi:1337
+    depends_on:
+      - mongodb
+      - strapi
+
+  ## Service MongoDB
+  mongodb:
+    image: mongo
+    volumes:
+      - mg-data:/data/db
+    ports:
+      - '27017:27017'
+  
+  strapi:
+    image: strapi/strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: strapi
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi
+    volumes:
+      - strapi-data:/srv/app
+    ports:
+      - '1337:1337'
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+        - 8081:8081
+    environment:
+        ME_CONFIG_MONGODB_SERVER: mongodb
+        ME_CONFIG_BASICAUTH_USERNAME: admin
+        ME_CONFIG_BASICAUTH_PASSWORD: password
+    depends_on:
+        - mongodb
+
+volumes:
+  mg-data: {}
+  strapi-data: {}
+  pg-data: {}
+  
+    

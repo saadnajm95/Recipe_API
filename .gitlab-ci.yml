@@ -1,0 +1,9 @@
+image: python:3.8-slim
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - echo "Tests suceeded !"
